@@ -18,14 +18,14 @@ public class DepartmentService {
 
     public List<DepartmentDTO> getAllDepartments() {
         return repository.findAll().stream()
-                .map(department -> new DepartmentDTO(department.getName(), department.getNumOfEmp()))
+                .map(department -> new DepartmentDTO(department.getId(), department.getName(), department.getNumOfEmp()))
                 .collect(Collectors.toList());
     }
 
     public DepartmentDTO getById(Long id) {
         DepartmentEntity department = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Department with ID: " + id + " not found!"));
-        return new DepartmentDTO(department.getName(), department.getNumOfEmp());
+        return new DepartmentDTO(department.getId(), department.getName(), department.getNumOfEmp());
     }
 
     public List<EmployeeEntity> getEmployeesByDepartmentId(Long departmentId) {
